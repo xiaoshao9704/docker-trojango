@@ -41,6 +41,7 @@ set_ws() {
 }
 
 self_signature() {
+    rm -rf $TARGET/key $TARGET/cert
     ORGANIZATION="$(md5sum /proc/sys/kernel/random/uuid | cut -d ' ' -f1)"
     openssl req -newkey rsa:2048 -nodes -keyout $TARGET/key_$ORGANIZATION.pem -x509 -days 3650 -subj "/C=HK/ST=Tuen Mun District/L=Tuen Mun District/O=$ORGANIZATION/OU=$ORGANIZATION Software/CN=$HOST/emailAddress=software@$ORGANIZATION.com" -out $TARGET/cert_$ORGANIZATION.pem
     ln -s $TARGET/key_$ORGANIZATION.pem $TARGET/key
@@ -48,6 +49,7 @@ self_signature() {
 }
 
 certbot_signature() {
+    rm -rf $TARGET/key $TARGET/cert
     certbot certonly --nginx -n -d $HOST --agree-tos --keep --email "$(md5sum /proc/sys/kernel/random/uuid | cut -d ' ' -f1)@gmail.com"
     ln -s /etc/letsencrypt/live/$HOST/fullchain.pem $TARGET/cert
     ln -s /etc/letsencrypt/live/$HOST/privkey.pem $TARGET/key
@@ -101,6 +103,9 @@ set_cert() {
     else
         certbot_signature
     fi
+    cp -f /trojan/template/nginx.conf /etc/nginx/http.d/default.conf
+    sed -i 's/#//g' /etc/nginx/http.d/default.conf
+    supervisorctl restart nginx
 }
 
 TARGET="$2"

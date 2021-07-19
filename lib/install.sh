@@ -14,7 +14,6 @@ build_trojan() {
 }
 
 set_nginx() {
-    mkdir -p /etc/nginx/conf.d
     cp -f /trojan/template/nginx.conf /etc/nginx/http.d/default.conf
     mkdir -p /run/nginx
 }
