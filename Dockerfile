@@ -2,7 +2,10 @@ FROM alpine:latest
 
 WORKDIR /trojan
 
-ENV CONFIG_PATH=/trojan/trojan-core/server.json
+ENV CONFIG_PATH /trojan/trojan-core/server.json
+ENV DOMAIN ""
+ENV PASS=""
+ENV WEBSOCKET=""
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
