@@ -1,2 +1,2 @@
 #!/bin/sh
-sh /trojan/lib/init.sh renew_cert
+sh /trojan/lib/init.sh renew_cert /trojan/cert
