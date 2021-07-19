@@ -7,7 +7,7 @@ set_config() {
     cp -f /trojan/template/server.json.template $CONFIG_PATH
     sed -i "s/{{PASS}}/$PASS/g" $CONFIG_PATH
     sed -i "s/{{HOST}}/$HOST/g" $CONFIG_PATH
-    sed -i "s/{{HOST}}/$WEBSOCKET/g" $CONFIG_PATH
+    sed -i "s/{{WEBSOCKET}}/$WEBSOCKET/g" $CONFIG_PATH
     sed -i "s/{{CONFIG_PATH}}/$CONFIG_PATH/g" /etc/supervisor/conf.d/trojan.ini
 }
 
