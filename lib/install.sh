@@ -18,14 +18,5 @@ set_nginx() {
     mkdir -p /run/nginx
 }
 
-set_bbr() {
-    if [ "$BBR" != ""  ]
-    then
-        echo -e "net.core.default_qdisc=fq\nnet.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
-        sysctl -p
-    fi
-}
-
 build_trojan
 set_nginx
-set_bbr

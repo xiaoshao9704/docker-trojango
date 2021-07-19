@@ -11,6 +11,14 @@ set_config() {
     sed -i "s/{{CONFIG_PATH}}/$CONFIG_PATH/g" /etc/supervisor/conf.d/trojan.ini
 }
 
+set_bbr() {
+    if [ "$BBR" != ""  ]
+    then
+        echo -e "net.core.default_qdisc=fq\nnet.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+        sysctl -p
+    fi
+}
+
 set_password() {
     if [ "$PASS" == "" ]
     then
@@ -129,5 +137,6 @@ case $1 in
         set_ws
         set_cert
         set_config
+        set_bbr
         ;;
 esac
