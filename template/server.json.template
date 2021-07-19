@@ -1,0 +1,19 @@
+{
+  "run_type": "server",
+  "local_addr": "0.0.0.0",
+  "local_port": 443,
+  "remote_addr": "127.0.0.1",
+  "remote_port": 80,
+  "password": ["{{PASS}}"],
+  "ssl": {
+    "cert": "/trojan/cert/cert",
+    "key": "/trojan/cert/key",
+    "sni": "{{HOST}}",
+    "fallback_port": 4433
+  },
+  "websocket": {
+    "enabled": true,
+    "path": "/{{WEBSOCKET}}",
+    "hostname": "{{HOST}}"
+  }
+}
