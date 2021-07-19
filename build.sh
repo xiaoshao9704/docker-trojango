@@ -1,6 +1,6 @@
 #!/bin/sh
 TAG=$1
-if [ "$TAG" == "" ]
+if [[ "$TAG" == "" ]]
 then
     TAG="latest"
 fi
