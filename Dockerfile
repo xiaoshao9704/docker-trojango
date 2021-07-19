@@ -15,7 +15,12 @@ COPY ./template /trojan/template
 COPY ./supervisor/supervisord.conf /etc/supervisord.conf
 COPY ./supervisor/conf.d /etc/supervisor/conf.d
 
-RUN sh /trojan/lib/install.sh
+RUN git clone https://github.com/p4gefau1t/trojan-go.git /trojan/trojan-core && \
+ cd /trojan/trojan-core && \
+ go build -tags "full" -o trojan
+
+RUN cp -f /trojan/template/nginx.conf /etc/nginx/http.d/default.conf && \
+ mkdir -p /run/nginx
 
 RUN apk del go git
 
