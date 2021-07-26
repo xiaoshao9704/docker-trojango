@@ -8,4 +8,4 @@ then
     sh /trojan/lib/init.sh "all" "/trojan/cert" 
 fi
 
-/trojan/trojan-core/trojan -config "$CONFIG_PATH"
+exec /trojan/trojan-core/trojan -config "$CONFIG_PATH"
